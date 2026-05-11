@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.capstone.controller.MainController"
+            style="-fx-background-color: #0E0F11;">
+
+    <!-- ══ TOP BAR ══════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10"
+              style="-fx-background-color: #111214;
+                     -fx-padding: 14 24;
+                     -fx-border-color: rgba(255,255,255,0.07);
+                     -fx-border-width: 0 0 0.5 0;">
+
+            <Region style="-fx-background-color: #6EE7B7; -fx-background-radius: 50;"
+                    prefWidth="8" prefHeight="8"/>
+
+            <Label text="Smart Inventory"
+                   style="-fx-font-family: 'DM Serif Display';
+                          -fx-font-size: 17; -fx-text-fill: #F5F4F0;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="v1.0  ·  SYSTEM"
+                   style="-fx-font-family: 'DM Mono';
+                          -fx-font-size: 11; -fx-text-fill: #3D4048;"/>
+        </HBox>
+    </top>
+
+    <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+    <left>
+        <VBox spacing="4"
+              style="-fx-background-color: #111214;
+                     -fx-padding: 20 12;
+                     -fx-min-width: 160;
+                     -fx-border-color: rgba(255,255,255,0.07);
+                     -fx-border-width: 0 0.5 0 0;">
+
+            <Label text="NAVIGATION"
+                   style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                          -fx-text-fill: #3D4048; -fx-padding: 0 8 8 8;"/>
+
+            <Button fx:id="navProducts" text="⬡  Products"
+                    maxWidth="Infinity" onAction="#showProducts"
+                    style="-fx-background-color: rgba(110,231,183,0.08);
+                           -fx-background-radius: 8; -fx-text-fill: #6EE7B7;
+                           -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                           -fx-alignment: CENTER_LEFT; -fx-padding: 9 10;
+                           -fx-border-width: 0; -fx-cursor: hand;"/>
+
+            <Button fx:id="navCategories" text="⬡  Categories"
+                    maxWidth="Infinity" onAction="#showCategories"
+                    style="-fx-background-color: transparent;
+                           -fx-background-radius: 8; -fx-text-fill: #6B7280;
+                           -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                           -fx-alignment: CENTER_LEFT; -fx-padding: 9 10;
+                           -fx-border-width: 0; -fx-cursor: hand;"/>
+
+            <Button fx:id="navSuppliers" text="⬡  Suppliers"
+                    maxWidth="Infinity" onAction="#showSuppliers"
+                    style="-fx-background-color: transparent;
+                           -fx-background-radius: 8; -fx-text-fill: #6B7280;
+                           -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                           -fx-alignment: CENTER_LEFT; -fx-padding: 9 10;
+                           -fx-border-width: 0; -fx-cursor: hand;"/>
+        </VBox>
+    </left>
+
+    <!-- ══ MAIN CONTENT ═════════════════════════════════════ -->
+    <center>
+        <StackPane style="-fx-background-color: #0E0F11;">
+
+            <!-- ─────────────── PRODUCTS PANE ─────────────── -->
+            <VBox fx:id="productsPane" spacing="20"
+                  style="-fx-padding: 28 28 20 28;">
+
+                <!-- Heading + search -->
+                <HBox alignment="CENTER_LEFT" spacing="16">
+                    <VBox spacing="4">
+                        <Label text="INVENTORY"
+                               style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                      -fx-text-fill: #3D4048;"/>
+                        <Label text="Products"
+                               style="-fx-font-family: 'DM Serif Display';
+                                      -fx-font-size: 22; -fx-text-fill: #F5F4F0;"/>
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <TextField fx:id="searchField"
+                               promptText="Search products…"
+                               prefWidth="220"
+                               style="-fx-background-color: #1A1C1F;
+                                      -fx-background-radius: 8;
+                                      -fx-border-color: rgba(255,255,255,0.10);
+                                      -fx-border-radius: 8; -fx-border-width: 0.5;
+                                      -fx-text-fill: #F5F4F0;
+                                      -fx-prompt-text-fill: #3D4048;
+                                      -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                                      -fx-padding: 8 12;"/>
+                </HBox>
+
+                <!-- Stat cards -->
+                <HBox spacing="12">
+                    <VBox HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: #161719;
+                                 -fx-background-radius: 12;
+                                 -fx-border-color: rgba(255,255,255,0.07);
+                                 -fx-border-radius: 12; -fx-border-width: 0.5;
+                                 -fx-padding: 14 16;">
+                        <Label text="TOTAL SKUs"
+                               style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                      -fx-text-fill: #3D4048;"/>
+                        <Label fx:id="statSkuLabel" text="0"
+                               style="-fx-font-family: 'Outfit'; -fx-font-size: 22;
+                                      -fx-text-fill: #F5F4F0; -fx-font-weight: 500;"/>
+                    </VBox>
+
+                    <VBox HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: #161719;
+                                 -fx-background-radius: 12;
+                                 -fx-border-color: rgba(255,255,255,0.07);
+                                 -fx-border-radius: 12; -fx-border-width: 0.5;
+                                 -fx-padding: 14 16;">
+                        <Label text="TOTAL VALUE"
+                               style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                      -fx-text-fill: #3D4048;"/>
+                        <Label fx:id="statValueLabel" text="₱0.00"
+                               style="-fx-font-family: 'Outfit'; -fx-font-size: 22;
+                                      -fx-text-fill: #6EE7B7; -fx-font-weight: 500;"/>
+                    </VBox>
+
+                    <VBox HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: #161719;
+                                 -fx-background-radius: 12;
+                                 -fx-border-color: rgba(255,255,255,0.07);
+                                 -fx-border-radius: 12; -fx-border-width: 0.5;
+                                 -fx-padding: 14 16;">
+                        <Label text="LOW STOCK"
+                               style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                      -fx-text-fill: #3D4048;"/>
+                        <Label fx:id="statLowLabel" text="0"
+                               style="-fx-font-family: 'Outfit'; -fx-font-size: 22;
+                                      -fx-text-fill: #EF9F27; -fx-font-weight: 500;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Products table -->
+                <TableView fx:id="productTable" VBox.vgrow="ALWAYS"
+                           style="-fx-background-color: #161719;
+                                  -fx-background-radius: 12;
+                                  -fx-border-color: rgba(255,255,255,0.07);
+                                  -fx-border-radius: 12; -fx-border-width: 0.5;
+                                  -fx-table-cell-border-color: rgba(255,255,255,0.04);">
+                    <columns>
+                        <TableColumn fx:id="idColumn"       text="ID"       prefWidth="55"/>
+                        <TableColumn fx:id="nameColumn"     text="Name"     prefWidth="180"/>
+                        <TableColumn fx:id="categoryColumn" text="Category" prefWidth="120"/>
+                        <TableColumn fx:id="supplierColumn" text="Supplier" prefWidth="120"/>
+                        <TableColumn fx:id="priceColumn"    text="Price"    prefWidth="90"/>
+                        <TableColumn fx:id="qtyColumn"      text="Qty"      prefWidth="60"/>
+                    </columns>
+                </TableView>
+
+                <!-- Action buttons -->
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Button text="+ Add" onAction="#onAddProduct"
+                            style="-fx-background-color: #6EE7B7;
+                                   -fx-background-radius: 8; -fx-text-fill: #0D2118;
+                                   -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                                   -fx-font-weight: bold; -fx-padding: 9 18;
+                                   -fx-border-width: 0; -fx-cursor: hand;"/>
+                    <Button text="Edit" onAction="#onEditProduct"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(255,255,255,0.10);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #6B7280; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Delete" onAction="#onDeleteProduct"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(240,149,149,0.20);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #F09595; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- ─────────────── CATEGORIES PANE ─────────────── -->
+            <VBox fx:id="categoriesPane" spacing="20"
+                  visible="false" managed="false"
+                  style="-fx-padding: 28 28 20 28;">
+
+                <VBox spacing="4">
+                    <Label text="INVENTORY"
+                           style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                  -fx-text-fill: #3D4048;"/>
+                    <Label text="Categories"
+                           style="-fx-font-family: 'DM Serif Display';
+                                  -fx-font-size: 22; -fx-text-fill: #F5F4F0;"/>
+                </VBox>
+
+                <TableView fx:id="categoryTable" VBox.vgrow="ALWAYS"
+                           style="-fx-background-color: #161719;
+                                  -fx-background-radius: 12;
+                                  -fx-border-color: rgba(255,255,255,0.07);
+                                  -fx-border-radius: 12; -fx-border-width: 0.5;
+                                  -fx-table-cell-border-color: rgba(255,255,255,0.04);">
+                    <columns>
+                        <TableColumn fx:id="catIdColumn"   text="ID"          prefWidth="60"/>
+                        <TableColumn fx:id="catNameColumn" text="Name"        prefWidth="200"/>
+                        <TableColumn fx:id="catDescColumn" text="Description" prefWidth="350"/>
+                    </columns>
+                </TableView>
+
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Button text="+ Add" onAction="#onAddCategory"
+                            style="-fx-background-color: #6EE7B7;
+                                   -fx-background-radius: 8; -fx-text-fill: #0D2118;
+                                   -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                                   -fx-font-weight: bold; -fx-padding: 9 18;
+                                   -fx-border-width: 0; -fx-cursor: hand;"/>
+                    <Button text="Edit" onAction="#onEditCategory"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(255,255,255,0.10);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #6B7280; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Delete" onAction="#onDeleteCategory"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(240,149,149,0.20);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #F09595; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+            <!-- ─────────────── SUPPLIERS PANE ─────────────── -->
+            <VBox fx:id="suppliersPane" spacing="20"
+                  visible="false" managed="false"
+                  style="-fx-padding: 28 28 20 28;">
+
+                <VBox spacing="4">
+                    <Label text="INVENTORY"
+                           style="-fx-font-family: 'DM Mono'; -fx-font-size: 10;
+                                  -fx-text-fill: #3D4048;"/>
+                    <Label text="Suppliers"
+                           style="-fx-font-family: 'DM Serif Display';
+                                  -fx-font-size: 22; -fx-text-fill: #F5F4F0;"/>
+                </VBox>
+
+                <TableView fx:id="supplierTable" VBox.vgrow="ALWAYS"
+                           style="-fx-background-color: #161719;
+                                  -fx-background-radius: 12;
+                                  -fx-border-color: rgba(255,255,255,0.07);
+                                  -fx-border-radius: 12; -fx-border-width: 0.5;
+                                  -fx-table-cell-border-color: rgba(255,255,255,0.04);">
+                    <columns>
+                        <TableColumn fx:id="supIdColumn"      text="ID"      prefWidth="55"/>
+                        <TableColumn fx:id="supNameColumn"    text="Name"    prefWidth="160"/>
+                        <TableColumn fx:id="supContactColumn" text="Contact" prefWidth="130"/>
+                        <TableColumn fx:id="supPhoneColumn"   text="Phone"   prefWidth="120"/>
+                        <TableColumn fx:id="supEmailColumn"   text="Email"   prefWidth="180"/>
+                    </columns>
+                </TableView>
+
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Button text="+ Add" onAction="#onAddSupplier"
+                            style="-fx-background-color: #6EE7B7;
+                                   -fx-background-radius: 8; -fx-text-fill: #0D2118;
+                                   -fx-font-family: 'Outfit'; -fx-font-size: 13;
+                                   -fx-font-weight: bold; -fx-padding: 9 18;
+                                   -fx-border-width: 0; -fx-cursor: hand;"/>
+                    <Button text="Edit" onAction="#onEditSupplier"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(255,255,255,0.10);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #6B7280; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Delete" onAction="#onDeleteSupplier"
+                            style="-fx-background-color: transparent;
+                                   -fx-background-radius: 8;
+                                   -fx-border-color: rgba(240,149,149,0.20);
+                                   -fx-border-radius: 8; -fx-border-width: 0.5;
+                                   -fx-text-fill: #F09595; -fx-font-family: 'Outfit';
+                                   -fx-font-size: 13; -fx-padding: 9 16; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+        </StackPane>
+    </center>
+
+</BorderPane>
